@@ -1,215 +1,286 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/services/auth.dart';
-class HomePage extends StatelessWidget{
+import 'package:flutter_app/services/delayed_animation.dart';
+
+class HomePage extends StatefulWidget {
   final AuthService _auth = AuthService();
   @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage>
+    with SingleTickerProviderStateMixin {
+  final int delayedAmount = 500;
+  double _scale;
+  AnimationController _controller;
+  @override
+  void initState() {
+    _controller = AnimationController(
+      vsync: this,
+      duration: Duration(
+        milliseconds: 200,
+      ),
+      lowerBound: 0.0,
+      upperBound: 0.1,
+    )..addListener(() {
+        setState(() {});
+      });
+    super.initState();
+  }
+
   Widget build(BuildContext context) {
+    final color = Colors.white;
+    _scale = 1 - _controller.value;
     return SafeArea(
-      // Center is a layout widget. It takes a single child and positions it
-      // in the middle of the parent.
-      child: Scrollbar(
-        // Column is also a layout widget. It takes a list of children and
-        // arranges them vertically. By default, it sizes itself to fit its
-        // children horizontally, and tries to be as tall as its parent.
-        //
-        // Invoke "debug painting" (press "p" in the console, choose the
-        // "Toggle Debug Paint" action from the Flutter Inspector in Android
-        // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-        // to see the wireframe for each widget.
-        //
-        // Column has various properties to control how it sizes itself and
-        // how it positions its children. Here we use mainAxisAlignment to
-        // center the children vertically; the main axis here is the vertical
-        // axis because Columns are vertical (the cross axis would be
-        // horizontal).
-        child:SingleChildScrollView(
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          children: <Widget>[
-          Icon(
-              Icons.person,
-            size: 100.0,
-            color: Colors.grey,
-          ),
-          Text(
-            'Hi, Name',
-          ),
-            SizedBox(height: 15),
-          Text('Hope you are having a good day!!',
-            style:const TextStyle(
-              fontSize: 25.0,
-              color: Colors.orange,
-            ),
-          ),
-            SizedBox(height: 15),
-          Card(
-            shape:
-            RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(35.0)
-            ),
-            color: Colors.purple[100],
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-
-              children: <Widget>[
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Container(
-                    child: Text(
-                  "          11:45 am",
-                ),
+        child: Container(
+      child: ListView(children: <Widget>[
+        Container(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Row(
+                children: <Widget>[
+                  Padding(
+                      padding: EdgeInsets.symmetric(
+                          vertical: 30.0, horizontal: 10.0),
+                      child: Icon(Icons.arrow_back_ios)),
+                ],
               ),
-            ),
-
-                const ListTile(
-                  contentPadding: EdgeInsets.all(10.0),
-                 trailing: FlutterLogo(size:72.0),
-                  title: Text('Today Meditation',
-                    style:const TextStyle(
-                    fontSize: 25.0,
-                    color: Colors.black87,
-                  ),
-                  ),
-                  subtitle: Text('Music by Julie Gable. Lyrics by Sidney Stein.'),
+              DelayedAnimation(
+                child: Text(
+                  'Hello, Name!',
+                  style: TextStyle(
+                      fontFamily: 'Sacramento',
+                      fontWeight: FontWeight.bold,
+                      fontSize: 30.0),
                 ),
+                delay: delayedAmount + 1000,
+              ),
+              DelayedAnimation(
+                child: Padding(
+                  padding: EdgeInsets.all(20.0),
+                  child: Material(
+                    color: Color(0xff8862b3),
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(30.0),
+                        bottomRight: Radius.circular(30.0)),
+                    elevation: 5.0,
+                    child: MaterialButton(
+                      onPressed: () {
+                        //Implement login functionality.
+                      },
+                      minWidth: MediaQuery.of(context).size.width * 0.2,
+                      height: MediaQuery.of(context).size.height * 0.2,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          SizedBox(
+                            height: 30.0,
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Text(
+                                'Talk to a ',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 18.0),
+                              ),
+                              Text(
+                                'psychologist',
+                                style: TextStyle(
+                                  fontFamily: 'Sacramento',
+                                  color: Colors.white,
+                                  fontSize: 30.0,
+                                ),
+                              )
+                            ],
+                          ),
+                          Container(
+                            child: Image(
+                              image: AssetImage(
+                                'assets/images/chat.png',
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                delay: delayedAmount + 3000,
+              ),
+              DelayedAnimation(
+                child: Padding(
+                  padding: EdgeInsets.all(20.0),
+                  child: Material(
+                    color: Color(0xff8862b3),
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(30.0),
+                        bottomRight: Radius.circular(30.0)),
+                    elevation: 5.0,
+                    child: MaterialButton(
+                      onPressed: () {
+                        //Implement login functionality.
+                      },
+                      minWidth: MediaQuery.of(context).size.width * 0.2,
+                      height: MediaQuery.of(context).size.height * 0.2,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          SizedBox(
+                            height: 30.0,
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  Text(
+                                    'R',
+                                    style: TextStyle(
+                                        fontFamily: 'Sacramento',
+                                        color: Colors.white,
+                                        fontSize: 30.0,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Text(
+                                    'elax',
+                                    style: TextStyle(
+                                      fontSize: 18.0,
+                                      color: Colors.white,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ],
+                          ),
+                          Container(
+                            child: Image(
+                              image: AssetImage(
+                                'assets/images/relax.png',
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                delay: delayedAmount + 3000,
+              ),
+              DelayedAnimation(
+                child: Padding(
+                  padding: EdgeInsets.all(20.0),
+                  child: Material(
+                    color: Color(0xff8862b3),
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(30.0),
+                        bottomRight: Radius.circular(30.0)),
+                    elevation: 5.0,
+                    child: MaterialButton(
+                      onPressed: () {
+                        //Implement login functionality.
+                      },
+                      minWidth: MediaQuery.of(context).size.width * 0.2,
+                      height: MediaQuery.of(context).size.height * 0.2,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          SizedBox(
+                            height: 30.0,
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Text(
+                                'Calm your',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 18.0),
+                              ),
+                              Text(
+                                'mind',
+                                style: TextStyle(
+                                  fontFamily: 'Sacramento',
+                                  color: Colors.white,
+                                  fontSize: 30.0,
+                                ),
+                              )
+                            ],
+                          ),
+                          Container(
+                            child: Image(
+                              image: AssetImage(
+                                'assets/images/mind.png',
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                delay: delayedAmount + 3000,
+              ),
+              DelayedAnimation(
+                child: Padding(
+                  padding: EdgeInsets.all(20.0),
+                  child: Material(
+                    color: Color(0xff8862b3),
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(30.0),
+                        bottomRight: Radius.circular(30.0)),
+                    elevation: 5.0,
+                    child: MaterialButton(
+                      onPressed: () {
+                        //Implement login functionality.
+                      },
+                      minWidth: MediaQuery.of(context).size.width * 0.2,
+                      height: MediaQuery.of(context).size.height * 0.2,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          SizedBox(
+                            height: 30.0,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Text(
+                                'F',
+                                style: TextStyle(
+                                    fontFamily: 'Sacramento',
+                                    color: Colors.white,
+                                    fontSize: 30.0,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              Text(
+                                'orums',
+                                style: TextStyle(
+                                  fontSize: 18.0,
+                                  color: Colors.white,
+                                ),
+                              )
+                            ],
+                          ),
+                          Container(
+                            child: Image(
+                              image: AssetImage(
+                                'assets/images/forum.png',
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                delay: delayedAmount + 3000,
+              ),
             ],
           ),
-      ),
-            SizedBox(height: 10),
-            Card(
-              shape:
-              RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(35.0)
-              ),
-              color: Colors.brown[100],
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Container(
-                      child: Text(
-                        "          10:00 am",
-                      ),
-                    ),
-                  ),
-                  const ListTile(
-                    contentPadding: EdgeInsets.all(10.0),
-                    trailing: FlutterLogo(size:72.0),
-                    title: Text('Talk to Someone',
-                      style:const TextStyle(
-                        fontSize: 25.0,
-                        color: Colors.black87,
-                      ),
-                    ),
-                    subtitle: Text('Music by Julie Gable. Lyrics by Sidney Stein.'),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(height: 10),
-            Card(
-              shape:
-              RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(35.0)
-              ),
-              color: Colors.blueGrey[100],
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Container(
-                      child: Text(
-                        "          9:00 pm",
-                      ),
-                    ),
-                  ),
-                  const ListTile(
-                    contentPadding: EdgeInsets.all(10.0),
-                    trailing: FlutterLogo(size:72.0),
-                    title: Text('Share Your Thoughts',
-                      style:const TextStyle(
-                        fontSize: 25.0,
-                        color: Colors.black87,
-                      ),
-                    ),
-                    subtitle: Text('Music by Julie Gable. Lyrics by Sidney Stein.'),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(height: 10),
-            Card(
-              shape:
-              RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(35.0)
-              ),
-              color: Colors.lightGreenAccent[100],
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Container(
-                      child: Text(
-                        "          11:45 am",
-                      ),
-                    ),
-                  ),
-                  ListTile(
-                    contentPadding: EdgeInsets.all(10.0),
-                    trailing: SizedBox(
-                      height: 150.0,
-                      width: 120.0, // fixed width and height
-                      child: Image.asset('assets/images/med.jpg')),
-                    title: Text('Map your Thoughts',
-                      style:const TextStyle(
-                        fontSize: 25.0,
-                        color: Colors.black87,
-                      ),
-                    ),
-                    subtitle: Text('Music by Julie Gable. Lyrics by Sidney Stein.'),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(height: 10),
-            Card(
-              shape:
-              RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(35.0)
-              ),
-              color: Colors.grey[200],
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Container(
-                      child: Text(
-                        "          11:45 am",
-                      ),
-                    ),
-                  ),
-                  const ListTile(
-                    contentPadding: EdgeInsets.all(10.0),
-                    trailing: FlutterLogo(size:72.0),
-                    title: Text('Track Your Mood!!',
-                      style:const TextStyle(
-                        fontSize: 25.0,
-                        color: Colors.black87,
-                      ),
-                    ),
-                    subtitle: Text('Music by Julie Gable. Lyrics by Sidney Stein.'),
-                  ),
-                ],
-              ),
-            ),
-      ],
-    ),
-      ),
-      ),
-    );
+        ),
+      ]),
+    ));
   }
 }

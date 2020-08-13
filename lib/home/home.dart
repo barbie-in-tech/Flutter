@@ -119,9 +119,7 @@ class _HomePageState extends State<HomePage>
                         bottomRight: Radius.circular(30.0)),
                     elevation: 5.0,
                     child: MaterialButton(
-                      onPressed: () {
-                        //Implement login functionality.
-                      },
+                      onPressed: () {},
                       minWidth: MediaQuery.of(context).size.width * 0.2,
                       height: MediaQuery.of(context).size.height * 0.2,
                       child: Row(
@@ -137,7 +135,7 @@ class _HomePageState extends State<HomePage>
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: <Widget>[
                                   Text(
-                                    'R',
+                                    'A',
                                     style: TextStyle(
                                         fontFamily: 'Sacramento',
                                         color: Colors.white,
@@ -145,7 +143,7 @@ class _HomePageState extends State<HomePage>
                                         fontWeight: FontWeight.bold),
                                   ),
                                   Text(
-                                    'elax',
+                                    'ctivities',
                                     style: TextStyle(
                                       fontSize: 18.0,
                                       color: Colors.white,

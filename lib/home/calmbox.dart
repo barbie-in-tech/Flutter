@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/player.dart';
 
+import 'HL1.dart';
+
 class CalmBox extends StatefulWidget {
   @override
   _CalmBoxState createState() => _CalmBoxState();
@@ -123,7 +125,7 @@ class _CalmBoxState extends State<CalmBox> {
         body: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('assets/images/bg.png'),
+              image: AssetImage('assets/images/bg.gif'),
               fit: BoxFit.cover,
             ),
           ),
@@ -183,8 +185,17 @@ class _CalmBoxState extends State<CalmBox> {
                 ],
               ),
               Headings(
-                text: "Relaxing music",
-              ),
+                  text: "Relaxing music",
+                  more: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return HL1();
+                        },
+                      ),
+                    );
+                  }),
               horizontalList1,
               Headings(
                 text: "Relaxing visuals",
@@ -212,7 +223,8 @@ class _CalmBoxState extends State<CalmBox> {
 
 class Headings extends StatelessWidget {
   final String text;
-  Headings({this.text});
+  final Function more;
+  Headings({this.text, this.more});
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -228,7 +240,7 @@ class Headings extends StatelessWidget {
               ),
             ),
             FlatButton(
-              onPressed: () {},
+              onPressed: more,
               child: Text(
                 '+ more',
                 style: TextStyle(
